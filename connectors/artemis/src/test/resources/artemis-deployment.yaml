@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: artemis-broker
+    labels:
+        app: artemis
+spec:
+    replicas: 1
+    strategy:
+        type: Recreate
+    selector:
+        matchLabels:
+            app: artemis
+    template:
+        metadata:
+            labels:
+                app: artemis
+        spec:
+            containers:
+                - name: artemis
+                  image: vromero/activemq-artemis:2.7.0
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 61616
+                        name: artemis
