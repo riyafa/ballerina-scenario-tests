@@ -38,10 +38,12 @@ function setup_deployment() {
 ## Functions
 
 function clone_repo_and_set_bal_path() {
-    git clone https://github.com/ballerina-platform/ballerina-scenario-tests.git
-    consumer_bal_path=ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/consumer.bal
-    remote_bal_path=ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/remote.bal
-    sender_bal_path=ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/sender.bal
+    git clone https://github.com/riyafa/ballerina-scenario-tests.git
+    git checkout artemis
+    ls connectors
+    consumer_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/consumer.bal
+    remote_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/remote.bal
+    sender_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/sender.bal
 }
 
 function deploy_artemis_broker() {
