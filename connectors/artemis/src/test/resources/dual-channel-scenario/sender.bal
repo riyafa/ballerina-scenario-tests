@@ -4,7 +4,7 @@ import ballerina/http;
 import ballerina/system;
 import ballerinax/kubernetes;
 
-artemis:Connection con = new("tcp://artemis-service:61616");
+artemis:Connection con = new("tcp://artemis-broker:61616");
 artemis:Session session = new(con, config = {username: "artemis", password: "simetraehcapa"});
 
 @kubernetes:Ingress {

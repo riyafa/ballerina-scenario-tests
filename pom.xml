@@ -114,6 +114,12 @@
             <modules>
                 <module>scenarios-commons</module>
                 <module>connectors/soap</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>artemis</id>
+            <modules>
+                <module>scenarios-commons</module>
                 <module>connectors/artemis</module>
             </modules>
         </profile>

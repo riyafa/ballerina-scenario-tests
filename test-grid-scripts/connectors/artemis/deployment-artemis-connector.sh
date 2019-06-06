@@ -40,7 +40,6 @@ function setup_deployment() {
 function clone_repo_and_set_bal_path() {
     git clone https://github.com/riyafa/ballerina-scenario-tests.git
     git checkout artemis
-    ls connectors
     consumer_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/consumer.bal
     remote_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/remote.bal
     sender_bal_path=connectors/artemis/src/test/resources/dual-channel-scenario/sender.bal
@@ -56,7 +55,6 @@ function deploy_artemis_broker() {
 }
 
 function print_kubernetes_debug_info() {
-    cat ${bal_path}
     kubectl get pods
     kubectl get svc artemis-sender -o=json
     kubectl get svc http-service -o=json
@@ -78,13 +76,14 @@ function replace_variables_in_bal_file() {
 }
 
 function build_and_deploy_artemis_resources() {
-    cd ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario
+    cd connectors/artemis/src/test/resources/dual-channel-scenario
     ${ballerina_home}/bin/ballerina init
     ${ballerina_home}/bin/ballerina build
-    cd ../../../../../../..
-    kubectl apply -f ${work_dir}/ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/consumer --namespace=${cluster_namespace}
-    kubectl apply -f ${work_dir}/ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/remote --namespace=${cluster_namespace}
-    kubectl apply -f ${work_dir}/ballerina-scenario-tests/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/sender --namespace=${cluster_namespace}
+    cd ../../../../../..
+    pwd
+    kubectl apply -f ${work_dir}/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/consumer --namespace=${cluster_namespace}
+    kubectl apply -f ${work_dir}/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/remote --namespace=${cluster_namespace}
+    kubectl apply -f ${work_dir}/connectors/artemis/src/test/resources/dual-channel-scenario/target/kubernetes/sender --namespace=${cluster_namespace}
 }
 
 function retrieve_and_write_properties_to_data_bucket() {
